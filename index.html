@@ -9,6 +9,13 @@
 </head>
 <body>
 
+    <!-- Hamburger Button (Mobile) -->
+    <button id="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
     <!-- Sidebar Navigation -->
     <aside id="sidebar">
         <div class="profile">
@@ -21,24 +28,32 @@
 
         <nav class="main-nav">
             <ul>
-                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-                <li><a href="#skills"><i class="fas fa-cogs"></i> Skills</a></li> <!-- Added Skills link -->
-                <li><a href="#projects"><i class="fas fa-briefcase"></i> Projects</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="#home" data-close-sidebar><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about" data-close-sidebar><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#skills" data-close-sidebar><i class="fas fa-cogs"></i> Skills</a></li>
+                <li><a href="#projects" data-close-sidebar><i class="fas fa-briefcase"></i> Projects</a></li>
+                <li><a href="#contact" data-close-sidebar><i class="fas fa-envelope"></i> Contact</a></li>
                 <li><a href="Kuldeep Maurya.pdf" download="Kuldeep_Maurya_Resume.pdf"><i class="fas fa-file-alt"></i> Resume</a></li>
             </ul>
         </nav>
     </aside>
+
+    <!-- Mobile overlay when sidebar is open -->
+    <div id="sidebar-overlay"></div>
 
     <!-- Main Content Area -->
     <main id="main-content">
 
         <!-- Home Section (Hero) -->
         <section id="home" class="hero-section">
-            <div class="hero-content">
+            <div class="gradient-mesh">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+                <div class="blob blob-3"></div>
+            </div>
+            <div class="hero-glass">
                 <h2>Kuldeep Maurya</h2>
-                <p>I'm a Web Developer</p> <!-- Add a typing effect later if desired -->
+                <p>Web Developer</p>
             </div>
         </section>
 
@@ -57,84 +72,63 @@
         <!-- Skills Section -->
         <section id="skills">
             <h2>Skills</h2>
-            <p class="skills-intro">Here's a summary of my technical abilities.</p> 
+            <p class="skills-intro">Here's a summary of my technical abilities.</p>
 
             <div class="skills-container">
-                <div class="skill">
-                    <div class="skill-info">
-                        <span>HTML</span>
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#00d2ff 0% 95%, rgba(255,255,255,0.08) 95% 100%);">
                         <span>95%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 95%;"></div>
-                    </div>
+                    <span class="skill-label">HTML</span>
                 </div>
 
-                <div class="skill">
-                    <div class="skill-info">
-                        <span>CSS</span>
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#00d2ff 0% 90%, rgba(255,255,255,0.08) 90% 100%);">
                         <span>90%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 90%;"></div>
-                    </div>
+                    <span class="skill-label">CSS</span>
                 </div>
 
-                <div class="skill">
-                    <div class="skill-info">
-                        <span>JavaScript</span>
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#7b2ff7 0% 85%, rgba(255,255,255,0.08) 85% 100%);">
                         <span>85%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 85%;"></div>
-                    </div>
+                    <span class="skill-label">JavaScript</span>
                 </div>
 
-                <div class="skill">
-                    <div class="skill-info">
-                        <span>Java</span>
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#7b2ff7 0% 75%, rgba(255,255,255,0.08) 75% 100%);">
                         <span>75%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 75%;"></div>
-                    </div>
+                    <span class="skill-label">Java</span>
                 </div>
 
-                <div class="skill">
-                    <div class="skill-info">
-                        <span>Python</span>
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#ff6b6b 0% 80%, rgba(255,255,255,0.08) 80% 100%);">
                         <span>80%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 80%;"></div>
-                    </div>
+                    <span class="skill-label">Python</span>
                 </div>
-                  <div class="skill">
-                    <div class="skill-info">
-                        <span>Express.js</span>
+
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#ff6b6b 0% 30%, rgba(255,255,255,0.08) 30% 100%);">
                         <span>30%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 30%;"></div>
-                    </div>
+                    <span class="skill-label">Express.js</span>
                 </div>
-                  <div class="skill">
-                    <div class="skill-info">
-                        <span>React.js</span>
+
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#00d2ff 0% 70%, rgba(255,255,255,0.08) 70% 100%);">
                         <span>70%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 70%;"></div>
-                    </div>
+                    <span class="skill-label">React.js</span>
                 </div>
-                 <div class="skill">
-                    <div class="skill-info">
-                        <span>SQL</span> <!-- Example -->
+
+                <div class="skill-pill">
+                    <div class="skill-circle" style="background: conic-gradient(#7b2ff7 0% 80%, rgba(255,255,255,0.08) 80% 100%);">
                         <span>80%</span>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 80%;"></div>
-                    </div>
+                    <span class="skill-label">SQL</span>
                 </div>
 
             </div>
@@ -144,18 +138,27 @@
         <section id="projects">
             <h2>My Projects</h2>
             <div class="project-grid">
-                <div class="project-card">
-                    <h3>Music Player Website</h3>
-                    <p>A web-based music player interface featuring playback controls and playlist display, built using HTML, CSS, and JavaScript with node.js and React.js for dynamic loading of the songs from the directory.</p>
-                    <a href="https://dynamic-music-player.onrender.com" target="_blank">View Project</a>
+                <div class="project-card" data-tilt>
+                    <div class="card-shine"></div>
+                    <h3>PixelLog</h3>
+                    <p>A pixel-art themed developer diary. Track what you did each day with tags, search, calendar view, and streak tracking. Built with React 19, Vite 8, and localStorage persistence. PWA ready — works offline and installable on phone/PC.</p>
+                    <a href="https://pixel-logg.netlify.app/" target="_blank">View Project</a>
                 </div>
-                <div class="project-card">
-                   <h3>Notes Web App</h3>
-                    <p> Built a CRUD-based notes application with user authentication and REST APIs. Deployed online to demonstrate scalable full-stack development. </p>
+                <div class="project-card" data-tilt>
+                    <div class="card-shine"></div>
+                    <h3>Notes Web App</h3>
+                    <p>Built a CRUD-based notes application with user authentication and REST APIs. Deployed online to demonstrate scalable full-stack development.</p>
                     <a href="https://notesvita-v1.netlify.app/" target="_blank">View Project</a>
                 </div>
-                 <div class="project-card">
-                   <h3>AI-Story Generator</h3>
+                <div class="project-card" data-tilt>
+                    <div class="card-shine"></div>
+                    <h3>Focus Space</h3>
+                    <p>A productivity homepage with Pomodoro timer, todos, ambient sounds, quotes, and beautiful backgrounds. 100% frontend — no account, no backend, works offline after install. Data stored in your browser's local storage.</p>
+                    <a href="https://focazz.netlify.app/" target="_blank">View Project</a>
+                </div>
+                <div class="project-card" data-tilt>
+                    <div class="card-shine"></div>
+                    <h3>AI-Story Generator</h3>
                     <p>I Used ReactJS to create its whole front-End part and even gave it more complexity to use Gemini AI API calls to generate The story, Even giving user the advantage to track the characters between the story and even communicate with other characters depending on the situation of the story.</p>
                     <a href="https://ai-story-generator-1-ek2o.onrender.com/" target="_blank">View Project</a>
                 </div>
@@ -165,30 +168,30 @@
         <!-- Contact Section -->
         <section id="contact">
             <h2>Contact Me</h2>
-            <p class="contact-intro">Feel free to reach out! Here's how you can get in touch.</p> 
+            <p class="contact-intro">Feel free to reach out! Here's how you can get in touch.</p>
             <div class="contact-info-container">
-                <div class="contact-item">
+                <div class="contact-item" data-refract>
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="contact-text">
                         <h4>Location:</h4>
                         <p>Lucknow, UP, India</p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item" data-refract>
                     <i class="fas fa-envelope"></i>
                     <div class="contact-text">
                         <h4>Email:</h4>
                         <p><a href="mailto:mauryakuldeep9180@gmail.com">mauryakuldeep9180@gmail.com</a></p>
                     </div>
                 </div>
-                <div class="contact-item">
+                <div class="contact-item" data-refract>
                     <i class="fas fa-phone"></i>
                     <div class="contact-text">
                         <h4>Call:</h4>
                         <p><a href="tel:+919235073798">+91 9235073798</a></p>
                     </div>
                 </div>
-                 <div class="contact-item">
+                <div class="contact-item" data-refract>
                     <i class="fab fa-linkedin"></i>
                     <div class="contact-text">
                         <h4>LinkedIn:</h4>
@@ -196,8 +199,6 @@
                     </div>
                 </div>
             </div>
-
-
         </section>
 
     </main>
