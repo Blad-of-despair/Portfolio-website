@@ -1,4 +1,3 @@
-/* Basic Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,78 +5,147 @@
 }
 
 :root {
-    --sidebar-width: 300px; /* Define sidebar width as a variable */
-    --primary-color: #007bff; /* Example primary color */
-    --sidebar-bg: #111; /* Dark background for sidebar */
-    --sidebar-text: #ccc; /* Light text color for sidebar */
-    --sidebar-text-hover: #fff;
-    --link-hover-bg: #333;
+    --sidebar-width: 280px;
+    --primary: #007bff;
+    --primary-light: #4da3ff;
+    --accent-1: #00d2ff;
+    --accent-2: #7b2ff7;
+    --accent-3: #ff6b6b;
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-blur: blur(16px);
+    --sidebar-bg: rgba(10, 10, 26, 0.92);
+    --text: #e0e0e0;
+    --text-light: #a0a0a0;
+    --bg-dark: #0a0a1a;
 }
 
 html {
-    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4; /* Light background for main content area */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--bg-dark);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(0, 210, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(123, 47, 247, 0.05) 0%, transparent 50%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* --- Remove Old Header Styles --- */
-/* header { ... } */
-/* nav { ... } */
-/* nav h1 { ... } */
-/* nav ul { ... } */
-/* nav ul li { ... } */
-/* nav ul li a { ... } */
-/* nav ul li a:hover { ... } */
+/* === Hamburger === */
+#hamburger {
+    display: none;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1100;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background 0.3s ease;
+}
 
-/* --- Sidebar Styling --- */
+#hamburger:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+#hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+#hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+#hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+#hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* === Sidebar Overlay === */
+#sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#sidebar-overlay.visible {
+    opacity: 1;
+}
+
+/* === Sidebar === */
 #sidebar {
-    position: fixed; /* Keep sidebar fixed on screen */
+    position: fixed;
     left: 0;
     top: 0;
     width: var(--sidebar-width);
-    height: 100vh; /* Full viewport height */
-    background-color: var(--sidebar-bg);
-    color: var(--sidebar-text);
-    padding: 30px 15px;
-    overflow-y: auto; /* Allow scrolling if content overflows */
-    transition: left 0.3s ease; /* For potential mobile toggle */
-    z-index: 1000; /* Ensure sidebar is on top */
+    height: 100vh;
+    background: var(--sidebar-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-right: 1px solid var(--glass-border);
+    color: var(--text);
+    padding: 40px 20px;
+    overflow-y: auto;
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
 }
 
 .profile {
     text-align: center;
-    margin-bottom: 30px;
-}
-
-.profile-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Circular image */
-    border: 6px solid #333; /* Border around image */
-    margin-bottom: 15px;
-    object-fit: cover; /* Ensure image covers the area */
+    margin-bottom: 40px;
 }
 
 .profile-name {
-    font-size: 1.8rem;
-    color: #fff;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--accent-1), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 14px;
+    line-height: 1.3;
 }
 
 .social-links a {
-    color: var(--sidebar-text);
-    margin: 0 8px;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+    color: var(--text-light);
+    margin: 0 10px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .social-links a:hover {
-    color: var(--sidebar-text-hover);
+    color: var(--accent-1);
+    transform: translateY(-2px);
+    text-shadow: 0 0 16px rgba(0, 210, 255, 0.4);
 }
 
 .main-nav ul {
@@ -85,188 +153,362 @@ body {
 }
 
 .main-nav ul li {
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .main-nav ul li a {
-    display: block; /* Make the whole area clickable */
-    color: var(--sidebar-text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-light);
     text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-size: 1rem;
+    padding: 11px 16px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
 }
 
 .main-nav ul li a i {
-    margin-right: 10px; /* Space between icon and text */
-    width: 20px; /* Align icons */
+    width: 20px;
     text-align: center;
+    font-size: 1rem;
 }
 
 .main-nav ul li a:hover {
-    background-color: var(--link-hover-bg);
-    color: var(--sidebar-text-hover);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    transform: translateX(4px);
 }
 
-/* --- Main Content Area Styling --- */
+/* === Main Content === */
 #main-content {
-    margin-left: var(--sidebar-width); /* Push content to the right of the sidebar */
-    padding: 40px;
-    min-height: 100vh; /* Ensure it takes at least full height */
+    margin-left: var(--sidebar-width);
+    padding: 40px 60px;
+    min-height: 100vh;
 }
 
-/* Hero Section Styling */
+/* === Hero Section === */
 #home {
-    /* Example: Add a background image */
-    /* background: url('images/hero-background.jpg') no-repeat center center/cover; */
-    height: 100vh; /* Full viewport height */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    margin-bottom: 60px;
+    border: none;
+}
+
+.gradient-mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.45;
+    animation: blobAnim 14s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+    width: 450px;
+    height: 450px;
+    background: var(--accent-1);
+    top: -15%;
+    left: -10%;
+}
+
+.blob-2 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-2);
+    bottom: -15%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 350px;
+    height: 350px;
+    background: var(--accent-3);
+    top: 40%;
+    left: 60%;
+    animation-delay: -9s;
+}
+
+@keyframes blobAnim {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(50px, -40px) scale(1.1);
+    }
+    66% {
+        transform: translate(-30px, 60px) scale(0.92);
+    }
+    100% {
+        transform: translate(40px, 30px) scale(1.05);
+    }
+}
+
+.hero-glass {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    color: #333; /* Adjust text color based on background */
-    padding: 0; /* Remove default section padding */
-    border-bottom: none; /* Remove border if not needed */
-    margin-bottom: 40px; /* Space before next section */
+    padding: 50px 70px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
 }
 
-.hero-content h2 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    /* color: #fff; /* Example if using dark background */
+.hero-glass h2 {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, #fff, var(--accent-1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
 }
 
-.hero-content p {
-    font-size: 1.5rem;
-    /* color: #eee; /* Example if using dark background */
+.hero-glass p {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 300;
 }
 
-
-/* --- Adjust Existing Section/Element Styles --- */
-
-/* Keep main container for sections, but adjust top margin */
-/* main { ... } - Removed, replaced by #main-content */
-
+/* === General Section Styles === */
 section {
-    padding: 60px 0; /* Increase padding for better spacing */
-    border-bottom: 1px solid #ddd; /* Slightly darker border */
-    /* Remove max-width if you want sections to span full width of main-content */
-    /* max-width: 1100px; */
-    /* margin: 0 auto; */ /* Remove auto margin if removing max-width */
+    padding: 60px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 section:last-of-type {
-    border-bottom: none; /* Remove border from last section */
+    border-bottom: none;
 }
 
 section h2 {
-    margin-bottom: 2rem; /* Increase space below headings */
+    margin-bottom: 2rem;
     text-align: center;
     font-size: 2.2rem;
-    color: #333;
+    color: #fff;
+    font-weight: 600;
 }
 
-#about p, #contact p {
-    text-align: left; /* Adjust alignment if needed */
-    max-width: 800px; /* Adjust max-width */
-    margin: 0 auto 1rem auto; /* Center block, add bottom margin */
+/* === About Section === */
+#about p {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 1.05rem;
 }
 
-/* Center the resume button within its paragraph */
 #about p:has(> .resume-button) {
     text-align: center;
 }
 
-
-/* Skills Section - Already styled, should work fine */
-#skills {
-    /* Keep existing padding if desired, or adjust */
-    /* text-align: center; */ /* Remove center alignment if using left-aligned heading */
+.resume-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary), var(--accent-1));
+    color: #fff;
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.25);
 }
 
+.resume-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.4);
+}
+
+/* === Skills Section === */
 #skills h2 {
-    text-align: left; /* Align heading left like the example */
+    text-align: left;
     position: relative;
-    padding-bottom: 15px; /* Space for the underline */
-    margin-bottom: 25px; /* Space below heading */
+    padding-bottom: 15px;
+    margin-bottom: 25px;
 }
 
-/* Underline effect for the heading */
 #skills h2::after {
     content: '';
     position: absolute;
     display: block;
-    width: 50px; /* Width of the underline */
-    height: 3px; /* Thickness of the underline */
-    background: var(--primary-color); /* Use your primary color */
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
     bottom: 0;
-    left: 0; /* Align underline to the left */
+    left: 0;
+    border-radius: 2px;
 }
 
 .skills-intro {
     text-align: left;
-    margin-bottom: 30px; /* Space below intro text */
-    color: #555;
-    max-width: 800px; /* Limit width */
+    margin-bottom: 30px;
+    color: var(--text-light);
+    max-width: 800px;
 }
 
 .skills-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Create two equal columns */
-    gap: 30px 50px; /* Row gap and Column gap */
-    max-width: 900px; /* Max width of the skills area */
-    /* margin: 0 auto; */ /* Center the container if needed */
-}
-
-.skill {
-    margin-bottom: 10px; /* Add some space below each skill bar group */
-}
-
-.skill-info {
     display: flex;
-    justify-content: space-between; /* Pushes name left, percentage right */
-    margin-bottom: 8px; /* Space between text and bar */
-    font-size: 0.9rem;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 900px;
+}
+
+.skill-pill {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 22px 10px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    cursor: default;
+}
+
+.skill-pill:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.15);
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.skill-circle {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.skill-circle span {
+    position: relative;
+    z-index: 1;
+}
+
+.skill-label {
     font-weight: 600;
-    color: #333;
-    text-transform: uppercase; /* Match example style */
+    font-size: 0.9rem;
+    color: var(--text);
+    letter-spacing: 0.3px;
 }
 
-.progress-bar-container {
-    background-color: #e9ecef; /* Light grey background for the track */
-    border-radius: 3px; /* Slightly rounded corners */
-    height: 10px; /* Height of the progress bar */
+/* === Projects Section === */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.8rem;
+    perspective: 1200px;
+}
+
+.project-card {
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: all 0.15s ease;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.03), transparent 60%);
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.card-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    overflow: hidden; /* Hide any overflow from the inner bar */
-}
-
-.progress-bar {
-    background-color: var(--primary-color); /* Use your primary color for the fill */
     height: 100%;
-    display: block;
-    border-radius: 3px; /* Match container rounding */
-    /* Width is set via inline style in HTML */
-    transition: width 0.6s ease; /* Optional: Add animation if width changes */
+    background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(255, 255, 255, 0.06), transparent 60%);
+    pointer-events: none;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
-
-/* --- Contact Section Styling --- */
-#contact {
-    /* Adjust padding if needed */
+.project-card:hover .card-shine {
+    opacity: 1;
 }
 
-#contact h2 {
-    text-align: center; /* Center the main heading */
-    margin-bottom: 1rem; /* Adjust spacing */
+.project-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
 }
-/* Remove the underline effect if not desired for Contact heading */
-/* #contact h2::after { ... } */
 
+.project-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent-1);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+    transition: gap 0.3s ease;
+}
+
+.project-card a::after {
+    content: '→';
+    transition: transform 0.3s ease;
+}
+
+.project-card a:hover {
+    gap: 8px;
+}
+
+/* === Contact Section === */
 .contact-intro {
     text-align: center;
-    margin-bottom: 3rem; /* Space below intro text */
-    color: #555;
+    margin-bottom: 3rem;
+    color: var(--text-light);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -274,155 +516,168 @@ section h2 {
 
 .contact-info-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 2rem;
-    max-width: 900px; /* Adjust as needed */
-    margin: 0 auto; /* Center the container */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .contact-item {
-    display: flex; /* Align icon and text side-by-side */
-    align-items: flex-start; /* Align items to the top */
-    background-color: #fff; /* White background for each item */
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    transition: box-shadow 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.contact-item:hover {
-     box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+.contact-item::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at var(--refract-x, 50%) var(--refract-y, 50%), rgba(0, 210, 255, 0.07), transparent 50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.contact-item:hover::before {
+    opacity: 1;
 }
 
 .contact-item i {
-    font-size: 1.8rem; /* Size of the icon */
-    color: var(--primary-color); /* Use primary color for icons */
-    margin-right: 15px; /* Space between icon and text */
-    margin-top: 5px; /* Adjust vertical alignment slightly */
-    width: 30px; /* Give icon a fixed width */
+    font-size: 1.5rem;
+    color: var(--accent-1);
+    min-width: 36px;
     text-align: center;
+    margin-top: 3px;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-text h4 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    color: #333;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-text p {
-    font-size: 0.95rem;
-    color: #555;
+    font-size: 0.9rem;
+    color: var(--text-light);
     margin: 0;
-    line-height: 1.5;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-text p a {
-    color: #555; /* Link color */
+    color: var(--text-light);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .contact-text p a:hover {
-    color: var(--primary-color); /* Link hover color */
-    text-decoration: underline;
+    color: var(--accent-1);
 }
 
-/* Optional: Contact Form Styling */
-/* .contact-form { ... } */
-
-
-/* Project Grid Styling */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 2rem; /* Increase gap */
-}
-/* .project-card { ... } */
-/* .project-card:hover { ... } */
-/* .project-card h3 { ... } */
-/* .project-card p { ... } */
-/* .project-card a { ... } */
-/* .project-card a:hover { ... } */
-
-
-/* Resume Button - Already styled, should work fine */
-.resume-button {
-    display: inline-block; /* Allows padding and margin */
-    background-color: #007bff; /* A more distinct button color (e.g., blue) */
-    color: #fff; /* White text */
-    padding: 10px 20px; /* Adjust padding for size */
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px; /* Rounded corners */
-    border: none; /* Remove default border */
-    cursor: pointer; /* Indicate it's clickable */
-    font-weight: bold; /* Make text bolder */
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
-    margin-top: 1rem; /* Keep the space above */
-}
-
-.resume-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); /* Slightly larger shadow on hover */
-    transform: translateY(-2px); /* Lift the button slightly on hover */
-}
-
-/* Optional: Add an active state for when the button is clicked */
-.resume-button:active {
-    background-color: #004085; /* Even darker shade when clicked */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Smaller shadow when pressed */
-    transform: translateY(0); /* Return to original position when clicked */
-}
-
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
-    background-color: #e9e9e9; /* Slightly different footer background */
-    color: #555;
-    font-size: 0.9rem;
-}
-
-/* --- Animation for Reveal on Scroll --- */
-/* Initial state for sections to be animated */
+/* === Reveal Animation === */
 section.reveal-on-scroll {
-    opacity: 0; /* Start fully transparent */
-    transform: translateY(50px); /* Start slightly lower */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smooth transition */
-    will-change: opacity, transform; /* Optimize animation performance */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-/* Active state when section becomes visible */
 section.is-visible {
-    opacity: 1; /* Fade in */
-    transform: translateY(0); /* Move to original position */
+    opacity: 1;
+    transform: translateY(0);
 }
 
-
-/* --- Responsive Design (Basic Example) --- */
-@media (max-width: 992px) { /* Adjust breakpoint as needed */
+/* === Responsive === */
+@media (max-width: 992px) {
     :root {
-        --sidebar-width: 0; /* Hide sidebar by default */
+        --sidebar-width: 0;
+    }
+
+    #hamburger {
+        display: flex;
     }
 
     #sidebar {
-        left: -300px; /* Move sidebar off-screen */
-        /* Add styles for a toggle button if implementing one */
+        left: -280px;
+        width: 280px;
+    }
+
+    #sidebar.open {
+        left: 0;
+    }
+
+    #sidebar-overlay {
+        display: block;
+    }
+
+    #sidebar-overlay.visible {
+        display: block;
     }
 
     #main-content {
-        margin-left: 0; /* Main content takes full width */
-        padding: 20px; /* Reduce padding */
+        margin-left: 0;
+        padding: 20px;
     }
 
-    /* Optional: Adjust hero text size */
-    .hero-content h2 {
-        font-size: 2.5rem;
+    .hero-glass {
+        padding: 40px 30px;
     }
-    .hero-content p {
-        font-size: 1.2rem;
+
+    .hero-glass h2 {
+        font-size: 2.4rem;
+    }
+
+    .hero-glass p {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .skills-container {
+        justify-content: center;
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #main-content {
+        padding: 15px;
+    }
+
+    .hero-glass {
+        padding: 30px 24px;
+        border-radius: 16px;
+    }
+
+    .hero-glass h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-glass p {
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
     }
 
     section {
@@ -430,32 +685,33 @@ section.is-visible {
     }
 
     section h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
-    /* Adjust grids for smaller screens if needed */
-    .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-        gap: 1rem;
-    }
     .project-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
     }
-}
 
-@media (max-width: 768px) {
-     /* Further adjustments for smaller tablets/large phones */
-     #main-content {
-        padding: 15px;
-     }
-     .hero-content h2 {
-        font-size: 2rem;
+    .contact-info-container {
+        grid-template-columns: 1fr;
     }
-    .hero-content p {
-        font-size: 1rem;
+
+    .skills-container {
+        gap: 12px;
     }
-    .project-grid {
-        grid-template-columns: 1fr; /* Stack projects */
+
+    .skill-pill {
+        padding: 8px 16px 8px 8px;
+        gap: 10px;
+    }
+
+    .skill-circle {
+        width: 38px;
+        height: 38px;
+        font-size: 0.6rem;
+    }
+
+    .skill-label {
+        font-size: 0.8rem;
     }
 }
