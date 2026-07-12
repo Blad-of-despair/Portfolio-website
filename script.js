@@ -64,6 +64,13 @@
             }
         });
 
+        card.addEventListener('click', function (e) {
+            // Don't navigate if user clicked the anchor itself (let default happen)
+            if (e.target.closest('a')) return;
+            var link = card.querySelector('a');
+            if (link) window.open(link.href, link.target || '_self');
+        });
+
         card.addEventListener('mouseleave', function () {
             card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
 
